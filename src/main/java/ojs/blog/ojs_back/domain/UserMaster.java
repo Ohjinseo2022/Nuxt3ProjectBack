@@ -32,7 +32,6 @@ public class UserMaster extends AbstractAuditingEntity<String> implements Serial
     */
     @Comment("UUID형태ID")
     @NotNull
-    @Size(max=36)
     @Id
     @Column(name="id", nullable = false)
     private String id;
@@ -41,7 +40,7 @@ public class UserMaster extends AbstractAuditingEntity<String> implements Serial
      *사용자이름
      */
     @Comment("사용자이름")
-    @Size(max=255)
+    @Size(max=36)
     @Column(name="user_name")
     private String userName;
 

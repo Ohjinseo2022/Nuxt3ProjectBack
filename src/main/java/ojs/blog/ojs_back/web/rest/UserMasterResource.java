@@ -31,7 +31,6 @@ public class UserMasterResource {
     private final UserMasterService userMasterService;
 
     private final UserMasterRepository userMasterRepository;
-// UserMasterRepository userMasterRepository
     public UserMasterResource(UserMasterService userMasterService, UserMasterRepository userMasterRepository ){
         this.userMasterService = userMasterService;
       this.userMasterRepository = userMasterRepository;
@@ -42,6 +41,7 @@ public class UserMasterResource {
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of companyMasters in body.
      */
+
     @GetMapping("/user-master")
     public ResponseEntity<List<UserMasterDTO>> getAllUserMasters(Pageable pageable) {
         log.debug("REST request to get a page of UserMasters");
