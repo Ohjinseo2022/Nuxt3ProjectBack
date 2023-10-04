@@ -17,20 +17,5 @@ public interface EntityMapper<D, E> {
 
     List<D> toDto(List<E> entityList);
 
-    @Named("partialUpdate")
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void partialUpdate(@MappingTarget E entity, D dto);
-
-    @BeforeMapping
-    default void generateId(D d) {
-        if(d == null) return;
-
-        if(d instanceof AbstractAuditingDTO<?>) {
-            AbstractAuditingDTO abstractAuditingDTO = (AbstractAuditingDTO)d;
-
-            if(abstractAuditingDTO.getId() == null || !StringUtils.hasText(abstractAuditingDTO.getId().toString())) {
-                abstractAuditingDTO.setId(TsidUtil.TSID_FACTORY.create().toString());
-            }
-        }
-    }
+///////
 }

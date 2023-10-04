@@ -35,6 +35,10 @@ public class UserMasterServiceImpl implements UserMasterService {
     @Transactional(readOnly = true)
     public Page<UserMasterDTO> findAll(Pageable pageable) {
         log.debug("Request to get all UserMasters");
+        //Page<UserMaster> userList = userMasterRepository.findAll(pageable);
+        //Page<UserMasterDTO> userDtoList = userMasterMapper.toDto(userList);
+
+        //return userDtoList;
         return userMasterRepository.findAll(pageable).map(userMasterMapper::toDto);
     }
 

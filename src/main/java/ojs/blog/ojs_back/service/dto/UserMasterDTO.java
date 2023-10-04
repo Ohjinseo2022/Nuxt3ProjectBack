@@ -6,20 +6,26 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import ojs.blog.ojs_back.domain.UserMaster;
 import ojs.blog.ojs_back.service.dto.cmn.FieldSelector;
 import ojs.blog.ojs_back.service.dto.cmn.View;
 import org.hibernate.annotations.Comment;
 
 import java.io.Serializable;
 
+
+/**
+ * A DTO for the {@link UserMaster} entity.
+ */
 //@Schema(description = "콘텐츠카탈로그원부") 스웨거 ui 목적
 @SuppressWarnings("common-java:DuplicatedBlocks")
-@Data
-@EqualsAndHashCode(callSuper = false, of="id")
+//@Data @EqualsAndHashCode(callSuper = false, of="id")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonFilter(FieldSelector.FILTER_NAME)// 물어볼것
+//@JsonFilter(FieldSelector.FILTER_NAME)// 물어볼것
 public class UserMasterDTO extends AbstractAuditingDTO<String> implements Serializable {
     /**
      * UUID형태 ID
