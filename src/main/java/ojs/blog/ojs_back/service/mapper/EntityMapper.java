@@ -8,14 +8,14 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-public interface EntityMapper<D, E> {
-    E toEntity(D dto);
+public interface EntityMapper<DTO, ENT> {
+    ENT toEntity(DTO dto);
 
-    D toDto(E entity);
+    DTO toDto(ENT entity);
 
-    List<E> toEntity(List<D> dtoList);
+    List<ENT> toEntity(List<DTO> dtoList);
 
-    List<D> toDto(List<E> entityList);
+    List<DTO> toDto(List<ENT> entityList);
 
-///////
+
 }

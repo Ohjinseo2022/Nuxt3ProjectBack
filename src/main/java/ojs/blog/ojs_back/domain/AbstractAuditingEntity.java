@@ -36,7 +36,7 @@ public abstract class AbstractAuditingEntity<T> implements Serializable {
     @CreatedBy
     @Column(name = "create_by", nullable = false, length = 50, updatable = false)
     @Comment("최초생성자")
-    private String createdBy;
+    private String createBy;
 
     @CreatedDate
     @Column(name = "create_date", updatable = false)

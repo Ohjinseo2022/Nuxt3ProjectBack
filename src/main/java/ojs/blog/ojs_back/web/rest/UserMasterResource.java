@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api")
 public class UserMasterResource {
@@ -33,7 +34,7 @@ public class UserMasterResource {
     private final UserMasterRepository userMasterRepository;
     public UserMasterResource(UserMasterService userMasterService, UserMasterRepository userMasterRepository ){
         this.userMasterService = userMasterService;
-      this.userMasterRepository = userMasterRepository;
+        this.userMasterRepository = userMasterRepository;
     }
     /**
      * {@code GET  /user-master} : get all the userMasters.
