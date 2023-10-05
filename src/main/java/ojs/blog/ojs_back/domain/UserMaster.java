@@ -16,7 +16,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-//@ToString @EqualsAndHashCode(callSuper = false, of="id")
+@ToString @EqualsAndHashCode(callSuper = false, of="id")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -30,7 +30,7 @@ public class UserMaster extends AbstractAuditingEntity<String> implements Serial
     /**
     * UUID형태 ID
     */
-    @Comment("UUID형태ID")
+    @Comment("IO")
     @NotNull
     @Id
     @Column(name="id", nullable = false, unique = true)

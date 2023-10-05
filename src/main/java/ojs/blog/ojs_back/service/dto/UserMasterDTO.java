@@ -32,7 +32,6 @@ public class UserMasterDTO extends AbstractAuditingDTO<String> implements Serial
      * UUID형태 ID
      */
     @JsonView(View.Required.class)
-
     @Size(max = 36)
     private String id;
 

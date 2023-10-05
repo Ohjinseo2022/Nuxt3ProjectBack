@@ -1,5 +1,6 @@
 package ojs.blog.ojs_back.service.mapper;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-10-06T00:28:30+0900",
+    date = "2023-10-06T01:00:35+0900",
     comments = "version: 1.5.1.Final, compiler: javac, environment: Java 17.0.7 (Oracle Corporation)"
 )
 @Component
@@ -23,6 +24,29 @@ public class UserMasterMapperImpl implements UserMasterMapper {
 
         UserMaster userMaster = new UserMaster();
 
+        userMaster.setCreateBy( dto.getCreateBy() );
+        if ( dto.getCreateDate() != null ) {
+            userMaster.setCreateDate( Instant.parse( dto.getCreateDate() ) );
+        }
+        userMaster.setUpdateBy( dto.getUpdateBy() );
+        if ( dto.getUpdateDate() != null ) {
+            userMaster.setUpdateDate( Instant.parse( dto.getUpdateDate() ) );
+        }
+        userMaster.setId( dto.getId() );
+        userMaster.setUserName( dto.getUserName() );
+        userMaster.setUserPassword( dto.getUserPassword() );
+        userMaster.setUserAge( dto.getUserAge() );
+        userMaster.setUserEmail( dto.getUserEmail() );
+        userMaster.setCompanyPosition( dto.getCompanyPosition() );
+        userMaster.setUserPhoneNumber( dto.getUserPhoneNumber() );
+        userMaster.setUserAddress( dto.getUserAddress() );
+        userMaster.setItemOneName( dto.getItemOneName() );
+        userMaster.setItemOneSerialInfo( dto.getItemOneSerialInfo() );
+        userMaster.setItemTwoName( dto.getItemTwoName() );
+        userMaster.setItemTwoSerialInfo( dto.getItemTwoSerialInfo() );
+        userMaster.setItemThreeName( dto.getItemThreeName() );
+        userMaster.setItemThreeSerialInfo( dto.getItemThreeSerialInfo() );
+
         return userMaster;
     }
 
@@ -32,11 +56,32 @@ public class UserMasterMapperImpl implements UserMasterMapper {
             return null;
         }
 
-        UserMasterDTO userMasterDTO = new UserMasterDTO();
+        UserMasterDTO.UserMasterDTOBuilder userMasterDTO = UserMasterDTO.builder();
 
-        userMasterDTO.setId( entity.getId() );
+        userMasterDTO.id( entity.getId() );
+        userMasterDTO.userName( entity.getUserName() );
+        userMasterDTO.userPassword( entity.getUserPassword() );
+        userMasterDTO.userAge( entity.getUserAge() );
+        userMasterDTO.userEmail( entity.getUserEmail() );
+        userMasterDTO.companyPosition( entity.getCompanyPosition() );
+        userMasterDTO.userPhoneNumber( entity.getUserPhoneNumber() );
+        userMasterDTO.userAddress( entity.getUserAddress() );
+        userMasterDTO.itemOneName( entity.getItemOneName() );
+        userMasterDTO.itemOneSerialInfo( entity.getItemOneSerialInfo() );
+        userMasterDTO.itemTwoName( entity.getItemTwoName() );
+        userMasterDTO.itemTwoSerialInfo( entity.getItemTwoSerialInfo() );
+        userMasterDTO.itemThreeName( entity.getItemThreeName() );
+        userMasterDTO.itemThreeSerialInfo( entity.getItemThreeSerialInfo() );
+        if ( entity.getCreateDate() != null ) {
+            userMasterDTO.createDate( entity.getCreateDate().toString() );
+        }
+        userMasterDTO.createBy( entity.getCreateBy() );
+        if ( entity.getUpdateDate() != null ) {
+            userMasterDTO.updateDate( entity.getUpdateDate().toString() );
+        }
+        userMasterDTO.updateBy( entity.getUpdateBy() );
 
-        return userMasterDTO;
+        return userMasterDTO.build();
     }
 
     @Override

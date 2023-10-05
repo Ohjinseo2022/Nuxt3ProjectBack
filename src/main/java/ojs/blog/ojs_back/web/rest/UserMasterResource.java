@@ -63,12 +63,24 @@ public class UserMasterResource {
     }
 
 //   단건조회
+    /**
+     * {@code GET  /user-master/{id} : get the "id" userMasters.
+     *
+     * @param id the id of the UserMasterDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the UserMasterDTO, or with status {@code 404 (Not Found)}.
+     */
     @GetMapping("/user-master/{id}")
-    public ResponseEntity<UserMasterDTO> getDetailUserMasters(@PathVariable String id ){
+    public ResponseEntity<Partial<UserMasterDTO>> getUserMasters(
+            @PathVariable String id ,
+     @RequestParam(name = "selectors",   required = false) List<String> selectors){
         log.debug("REST request to get UserMasters Detail : {}", id);
         Optional<UserMasterDTO> userMasterDTO = userMasterService.findOne(id);
-//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseUtil.wrapOrNotFound(userMasterDTO);
-
+//       HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(
+                Partial.with(
+                        userMasterDTO.get(),
+                        FieldSelector.withDefaultView(selectors, View.Detail.class)
+                )
+        );
     }
 }
