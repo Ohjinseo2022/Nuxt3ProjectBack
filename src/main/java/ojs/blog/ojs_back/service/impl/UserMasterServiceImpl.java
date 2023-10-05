@@ -46,7 +46,8 @@ public class UserMasterServiceImpl implements UserMasterService {
     @Transactional(readOnly = true)
     public Optional<UserMasterDTO> findOne(String id) {
         log.debug("Request to get CompanyMaster : {}", id);
-        return userMasterRepository.findById(id).map(userMasterMapper::toDto);
+        Optional<UserMasterDTO> userMasterDTO = userMasterRepository.findById(id).map(userMasterMapper::toDto);
+        return userMasterDTO;
     }
 
 }

@@ -4,6 +4,7 @@ package ojs.blog.ojs_back.service.dto;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Column;
+
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import ojs.blog.ojs_back.domain.UserMaster;
@@ -31,20 +32,21 @@ public class UserMasterDTO extends AbstractAuditingDTO<String> implements Serial
      * UUID형태 ID
      */
     @JsonView(View.Required.class)
+
     @Size(max = 36)
     private String id;
 
     /**
      * 사용자이름
      */
-    @JsonView(View.Detail.class)
+    @JsonView(View.List.class)
     @Size(max = 255)
     private String userName;
 
     /**
      *사용자 패스워드
      */
-    @JsonView(View.Basic.class)
+    @JsonView(View.Detail.class)
     @Size(max=255)
     private String userPassword;
 
@@ -85,42 +87,42 @@ public class UserMasterDTO extends AbstractAuditingDTO<String> implements Serial
     /**
      *사용중인 장비1
      */
-    @JsonView(View.Basic.class)
+    @JsonView(View.List.class)
     @Size(max=255)
     private String itemOneName;
 
     /**
      *사용중인 장비1 시리얼번호
      */
-    @JsonView(View.Basic.class)
+    @JsonView(View.List.class)
     @Size(max=255)
     private String itemOneSerialInfo;
 
     /**
      *사용중인 장비2
      */
-    @JsonView(View.Basic.class)
+    @JsonView(View.List.class)
     @Size(max=255)
     private String itemTwoName;
 
     /**
      *사용중인 장비2 시리얼번호
      */
-    @JsonView(View.Basic.class)
+    @JsonView(View.List.class)
     @Size(max=255)
     private String itemTwoSerialInfo;
 
     /**
      *사용중인 장비3
      */
-    @JsonView(View.Detail.class)
+    @JsonView(View.List.class)
     @Size(max=255)
     private String itemThreeName;
 
     /**
      *사용중인 장비3 시리얼번호
      */
-    @JsonView(View.Basic.class)
+    @JsonView(View.List.class)
     @Size(max=255)
     private String itemThreeSerialInfo;
 
