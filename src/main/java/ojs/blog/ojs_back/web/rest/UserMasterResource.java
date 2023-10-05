@@ -3,6 +3,9 @@ package ojs.blog.ojs_back.web.rest;
 import ojs.blog.ojs_back.repository.UserMasterRepository;
 import ojs.blog.ojs_back.service.UserMasterService;
 import ojs.blog.ojs_back.service.dto.UserMasterDTO;
+import ojs.blog.ojs_back.service.dto.cmn.FieldSelector;
+import ojs.blog.ojs_back.service.dto.cmn.Partial;
+import ojs.blog.ojs_back.service.dto.cmn.View;
 import ojs.blog.ojs_back.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -44,10 +48,34 @@ public class UserMasterResource {
      */
 
     @GetMapping("/user-master")
-    public ResponseEntity<List<UserMasterDTO>> getAllUserMasters(Pageable pageable) {
+    public ResponseEntity<Partial<List<UserMasterDTO>>> getAllUserMasters(
+            @RequestParam(name = "selectors",       required = false) List<String> selectors,
+            Pageable pageable
+    ) {
         log.debug("REST request to get a page of UserMasters");
         Page<UserMasterDTO> page = userMasterService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(
+                Partial.with(
+                        page.getContent(),
+                        FieldSelector.withDefaultView(selectors, View.List.class)
+                )
+        );
     }
+
+//    @GetMapping("/user-master")
+//    public ResponseEntity<Partial<UserMasterDTO>> getAllUserMasters1(
+//            @RequestParam(name = "selectors",       required = false) List<String> selectors,
+//            Pageable pageable
+//    ) {
+//        log.debug("REST request to get a page of UserMasters");
+//        Page<UserMasterDTO> page = userMasterService.findAll(pageable);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+//        return ResponseEntity.ok().headers(headers).body(
+//                Partial.with(
+//                        page.getContent().get(0),
+//                        FieldSelector.withDefaultView(selectors, View.Detail.class)
+//                )
+//        );
+//    }
 }

@@ -66,7 +66,7 @@ public class FieldSelector {
 
     static Class<?> toViewClass(String str) {
 
-        if ("@min".equals(str)) return View.Min.class;
+        if ("@required".equals(str)) return View.Required.class;
         else if ("@summary".equals(str)) return View.Summary.class;
         else if ("@basic".equals(str)) return View.Basic.class;
         else if ("@detail".equals(str)) return View.Detail.class;

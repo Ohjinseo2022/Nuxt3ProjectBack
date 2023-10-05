@@ -25,12 +25,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-//@JsonFilter(FieldSelector.FILTER_NAME)// 물어볼것
+@JsonFilter(FieldSelector.FILTER_NAME)
 public class UserMasterDTO extends AbstractAuditingDTO<String> implements Serializable {
     /**
      * UUID형태 ID
      */
-    @JsonView(View.Min.class)
+    @JsonView(View.Required.class)
     @Size(max = 36)
     private String id;
 
