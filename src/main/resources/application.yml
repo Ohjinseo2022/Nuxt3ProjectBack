@@ -1,0 +1,15 @@
+spring:
+  profiles: # profiles 설정
+    active: dev # 다른 설정이 없을 때 default 환경 값
+  datasource:
+    #    driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    #    driverClassName: org.postgresql.Driver
+    #    password: ENC(WyYmeH1nYpkVT9XmVYSEBwMlyhwaJIXU)
+    #    url: ENC(Be5se8P98qMkn0jVwLkSlijY/UxlJMoQHCpWD8K777Ce8+N2wfhcVPypQ9F5+XuCgPW35aQTPUPqbEuWNIR/OUryEyHXIAdkourq7DYChb9ILD/1Fq+RZtox5ZBxnYI2)
+    #    username: ENC(/9NI4xpZWfUQ5VYglRmyF3FsOQFzG4bY)
+    #    hikari:
+    #      connectionTimeout: 3000
+    #      maximumPoolSize: 5
+    #      maxLifetime: 18000
+    #driverClassName: org.postgresql.Driver
+    driverClassName: org.postgresql.Driver
