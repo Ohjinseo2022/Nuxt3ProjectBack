@@ -7,7 +7,7 @@
 FROM openjdk:17.0.2-jdk-buster
 
 # jar 파일 위치를 변수로 설정
-ARG JAR_FILE=build/*.jar
+ARG JAR_FILE=./build/libs/*.jar
 
 ARG ENVIRONMENT=dev
 # 환경변수 설정
