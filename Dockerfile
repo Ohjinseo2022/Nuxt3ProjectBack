@@ -4,7 +4,7 @@
 #!/bin/bash
 
 # base 이미지 설정
-FROM openjdk:17.0.2-jdk-buster
+FROM openjdk:17-alpine
 
 # jar 파일 위치를 변수로 설정
 ARG JAR_FILE=./build/libs/ojs_back-0.0.1-SNAPSHOT.jar
