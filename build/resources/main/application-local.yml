@@ -1,0 +1,60 @@
+
+server:
+  port: 8080
+
+#keycloak:
+#  realm: Realm1
+#  auth-server-url: http://localhost:8080
+#  ssl-required: external
+#  resource: client1
+#  credentials:
+#    secret: q0YFyBe7ewhBHe2H0QCJHlDdweiVLGYt
+#  use-resource-role-mappings: true
+#  bearer-only: true
+
+logging:
+  level:
+    root: INFO
+    jdbc:
+      audit: OFF
+      resultset: OFF
+      resultsettable: INFO
+      sqlonly: OFF
+      sqltiming: INFO
+
+
+spring:
+  datasource:
+    #    driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    #    driverClassName: org.postgresql.Driver
+    #    password: ENC(WyYmeH1nYpkVT9XmVYSEBwMlyhwaJIXU)
+    #    url: ENC(Be5se8P98qMkn0jVwLkSlijY/UxlJMoQHCpWD8K777Ce8+N2wfhcVPypQ9F5+XuCgPW35aQTPUPqbEuWNIR/OUryEyHXIAdkourq7DYChb9ILD/1Fq+RZtox5ZBxnYI2)
+    #    username: ENC(/9NI4xpZWfUQ5VYglRmyF3FsOQFzG4bY)
+    #    hikari:
+    #      connectionTimeout: 3000
+    #      maximumPoolSize: 5
+    #      maxLifetime: 18000
+    #driverClassName: org.postgresql.Driver
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.219.100:5552/blogpjt
+    username: ojsadmin
+    password: ojsadmin
+    hikari:
+      connectionTimeout: 3000
+      maximumPoolSize: 5
+      maxLifetime: 18000
+  jpa:
+    properties:
+      hibernate:
+        "[default_schema]": public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+#lotte:
+#  ftp:
+#    server: 10.131.145.1
+#    port: 21
+#    username : ftpTester1
+#    password: imsi00!!
+#    ftpPath: /space
+#  file:
+#    filePath : /_storageTest
