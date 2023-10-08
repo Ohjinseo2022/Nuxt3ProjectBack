@@ -1,7 +1,8 @@
 
 server:
   port: 8080
-
+  servlet:
+    context-path: ''
 #keycloak:
 #  realm: Realm1
 #  auth-server-url: http://localhost:8080

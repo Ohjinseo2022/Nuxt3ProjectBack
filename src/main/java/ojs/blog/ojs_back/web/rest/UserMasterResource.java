@@ -51,7 +51,8 @@ public class UserMasterResource {
             @RequestParam(name = "selectors",       required = false) List<String> selectors,
             Pageable pageable
     ) {
-        log.debug("REST request to get a page of UserMasters");
+//        System.out.println("REST request to get a page of UserMasters");
+//        log.debug("REST request to get a page of UserMasters");
         Page<UserMasterDTO> page = userMasterService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(
