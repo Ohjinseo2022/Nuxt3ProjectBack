@@ -51,4 +51,11 @@ public class UserMasterServiceImpl implements UserMasterService {
         return userMasterDTO;
     }
 
+    @Override
+    public UserMasterDTO save(UserMasterDTO userMasterDTO){
+        UserMaster userMaster = userMasterMapper.toEntity(userMasterDTO);
+        userMaster = userMasterRepository.save(userMaster);
+        return userMasterMapper.toDto(userMaster);
+    }
+
 }

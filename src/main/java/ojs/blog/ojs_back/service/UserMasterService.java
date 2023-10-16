@@ -14,4 +14,6 @@ public interface UserMasterService {
     Page<UserMasterDTO> findAll(Pageable pageable);
 
     Optional<UserMasterDTO> findOne(String id);
+
+    UserMasterDTO save(UserMasterDTO userMasterDTO);
 }

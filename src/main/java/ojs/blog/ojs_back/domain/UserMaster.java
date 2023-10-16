@@ -33,7 +33,7 @@ public class UserMaster extends AbstractAuditingEntity<String> implements Serial
     @Comment("IO")
     @NotNull
     @Id
-    @Column(name="id", nullable = false, unique = true)
+    @Column(name="id", unique = true)
     private String id;
 
     /**

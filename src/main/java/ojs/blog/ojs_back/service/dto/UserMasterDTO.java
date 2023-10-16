@@ -20,7 +20,7 @@ import java.io.Serializable;
  */
 //@Schema(description = "콘텐츠카탈로그원부") 스웨거 ui 목적
 @SuppressWarnings("common-java:DuplicatedBlocks")
-//@Data @EqualsAndHashCode(callSuper = false, of="id")
+@Data @EqualsAndHashCode(callSuper = false, of="id")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -1,23 +1,30 @@
 package ojs.blog.ojs_back.web.rest;
 
+import jakarta.validation.Valid;
+
 import ojs.blog.ojs_back.repository.UserMasterRepository;
 import ojs.blog.ojs_back.service.UserMasterService;
 import ojs.blog.ojs_back.service.dto.UserMasterDTO;
 import ojs.blog.ojs_back.service.dto.cmn.FieldSelector;
 import ojs.blog.ojs_back.service.dto.cmn.Partial;
 import ojs.blog.ojs_back.service.dto.cmn.View;
+import ojs.blog.ojs_back.util.HeaderUtil;
 import ojs.blog.ojs_back.util.PaginationUtil;
 import ojs.blog.ojs_back.util.ResponseUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,4 +91,20 @@ public class UserMasterResource {
                 )
         );
     }
+
+    //신규생성
+    @PostMapping(value="/user-master/create", produces="application/json",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE )
+    public ResponseEntity<UserMasterDTO> createUserMaster(@Valid @RequestBody UserMasterDTO userMasterDTO) throws URISyntaxException{
+        log.debug("REST request to get UserMasters Detail : {}", userMasterDTO);
+        if (userMasterDTO.getId() != null && userMasterRepository.existsById(userMasterDTO.getId())) {
+            throw new URISyntaxException("A new userMenu cannot already have an ID", ENTITY_NAME);
+        }
+        userMasterDTO.setCreateBy(userMasterDTO.getUserName());
+        UserMasterDTO result = userMasterService.save(userMasterDTO);
+        return ResponseEntity
+                .created(new URI("/api/user-master/create/"+ result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert("Backend",true,ENTITY_NAME,result.getId()))
+                .body(result);
+    }
+
 }
