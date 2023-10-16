@@ -16,10 +16,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -58,6 +61,11 @@ public class UserMasterResource {
             @RequestParam(name = "selectors",       required = false) List<String> selectors,
             Pageable pageable
     ) {
+        if(ObjectUtils.isEmpty(pageable)) {
+            pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.desc("createDate")));
+        } else {
+            pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Order.desc("createDate")));
+        }
 //        System.out.println("REST request to get a page of UserMasters");
 //        log.debug("REST request to get a page of UserMasters");
         Page<UserMasterDTO> page = userMasterService.findAll(pageable);
