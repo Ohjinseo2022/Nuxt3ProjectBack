@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-10-08T18:59:51+0900",
+    date = "2023-10-17T23:31:09+0900",
     comments = "version: 1.5.1.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.2.1.jar, environment: Java 17.0.7 (Oracle Corporation)"
 )
 @Component
@@ -51,6 +51,34 @@ public class UserMasterMapperImpl implements UserMasterMapper {
     }
 
     @Override
+    public List<UserMaster> toEntity(List<UserMasterDTO> dtoList) {
+        if ( dtoList == null ) {
+            return null;
+        }
+
+        List<UserMaster> list = new ArrayList<UserMaster>( dtoList.size() );
+        for ( UserMasterDTO userMasterDTO : dtoList ) {
+            list.add( toEntity( userMasterDTO ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<UserMasterDTO> toDto(List<UserMaster> entityList) {
+        if ( entityList == null ) {
+            return null;
+        }
+
+        List<UserMasterDTO> list = new ArrayList<UserMasterDTO>( entityList.size() );
+        for ( UserMaster userMaster : entityList ) {
+            list.add( toDto( userMaster ) );
+        }
+
+        return list;
+    }
+
+    @Override
     public UserMasterDTO toDto(UserMaster entity) {
         if ( entity == null ) {
             return null;
@@ -82,33 +110,5 @@ public class UserMasterMapperImpl implements UserMasterMapper {
         userMasterDTO.updateBy( entity.getUpdateBy() );
 
         return userMasterDTO.build();
-    }
-
-    @Override
-    public List<UserMaster> toEntity(List<UserMasterDTO> dtoList) {
-        if ( dtoList == null ) {
-            return null;
-        }
-
-        List<UserMaster> list = new ArrayList<UserMaster>( dtoList.size() );
-        for ( UserMasterDTO userMasterDTO : dtoList ) {
-            list.add( toEntity( userMasterDTO ) );
-        }
-
-        return list;
-    }
-
-    @Override
-    public List<UserMasterDTO> toDto(List<UserMaster> entityList) {
-        if ( entityList == null ) {
-            return null;
-        }
-
-        List<UserMasterDTO> list = new ArrayList<UserMasterDTO>( entityList.size() );
-        for ( UserMaster userMaster : entityList ) {
-            list.add( toDto( userMaster ) );
-        }
-
-        return list;
     }
 }
