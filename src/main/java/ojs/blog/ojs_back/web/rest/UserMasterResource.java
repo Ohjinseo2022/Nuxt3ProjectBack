@@ -15,11 +15,13 @@ import ojs.blog.ojs_back.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
@@ -29,6 +31,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -115,4 +118,40 @@ public class UserMasterResource {
                 .body(result);
     }
 
+    //부분수정
+    @PutMapping(value="/user-master/update/{id}", produces="application/json",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<UserMasterDTO> updateUserMaster(
+            @PathVariable(value="id", required = false) final String id,
+            @Valid @RequestBody UserMasterDTO userMasterDTO
+    )throws URISyntaxException{
+        //아이디 null 값 체크
+        if(userMasterDTO.getId() == null){
+            throw new URISyntaxException("userMaster ID is required",ENTITY_NAME);
+        }
+        //파라미터에 담긴 id 와 body에 담긴 id 값 일치여부
+        if (!Objects.equals(id, userMasterDTO.getId())) {
+            throw new URISyntaxException("Invalid ID", ENTITY_NAME);
+        }
+        // 테이블에 id 동일한값 존재 유무 체크
+        if(!userMasterRepository.existsById(id)){
+            throw new URISyntaxException("Entity not found", ENTITY_NAME);
+        }
+        UserMasterDTO result = userMasterService.update(userMasterDTO);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert("Backend",true,ENTITY_NAME,result.getId())).body(result);
+    }
+
+    //단건 삭제
+    @PutMapping(value="/user-master/delete/{id}")
+    public ResponseEntity<Void> deleteUserMaster(
+            @PathVariable String id)throws Exception{
+        System.out.println(id);
+        ResponseEntity<Void> entity = null;
+        try{
+            userMasterService.delete(id);
+            return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert("Backend", true, ENTITY_NAME, id)).build();
+        } catch (Exception e) {
+            entity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return entity;
+        }
+    }
 }

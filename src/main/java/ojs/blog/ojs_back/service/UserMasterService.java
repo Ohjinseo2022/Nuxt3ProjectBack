@@ -16,4 +16,8 @@ public interface UserMasterService {
     Optional<UserMasterDTO> findOne(String id);
 
     UserMasterDTO save(UserMasterDTO userMasterDTO);
+
+    UserMasterDTO update(UserMasterDTO userMasterDTO);
+
+    void delete(String id);
 }

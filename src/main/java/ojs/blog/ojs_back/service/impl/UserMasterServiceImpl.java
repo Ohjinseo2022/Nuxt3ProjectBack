@@ -58,4 +58,16 @@ public class UserMasterServiceImpl implements UserMasterService {
         return userMasterMapper.toDto(userMaster);
     }
 
+    @Override
+    public UserMasterDTO update(UserMasterDTO userMasterDTO){
+        UserMaster userMaster = userMasterMapper.toEntity(userMasterDTO);
+        userMaster = userMasterRepository.save(userMaster);
+        return userMasterMapper.toDto(userMaster);
+    }
+
+    @Override
+    public void delete(String id){
+        log.debug("Request to delete ShoppingBasketMaster : {}", id);
+        userMasterRepository.deleteById(id);
+    }
 }
